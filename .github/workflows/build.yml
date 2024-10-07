@@ -7,7 +7,15 @@ jobs:
     steps:
     - name: Checkout current build target
       uses: actions/checkout@v2
+
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
+
     - name: Build with MSBuild
       run: msbuild  '.\RS_ASIO.sln'
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: BuildArtifacts
+        path: bin\Win32\Debug\**
